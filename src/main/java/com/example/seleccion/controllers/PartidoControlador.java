@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,16 @@ public class PartidoControlador {
         partidoDtos = Lpartidos.stream().map(this::partidoToPartidoDtoFront).toList();
 
         return ResponseEntity.ok().body(partidoDtos);
+    }
+
+
+    //Actualizar
+    @PutMapping("/partidos/actualizar/{id}")
+    public ResponseEntity<PartidoDtoFront> actualizarPartido(@PathVariable("id") Long id, @RequestBody PartidoDto partidoActualizado){        
+        Optional<Partido> partido = partidoServicio.actualizarPartido(id, partidoActualizado);
+        PartidoDtoFront partidoDto = partidoToPartidoDtoFront(partido.get());
+
+        return ResponseEntity.ok().body(partidoDto);
     }
 
     //buscar por id

@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.example.seleccion.dtos.PartidoDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 
-public class Partido {
+public class    Partido {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -48,7 +49,7 @@ public class Partido {
 
     private String arbitroPrincipal;
 
-    public Partido actualizarCon(Partido partido) {
+    public Partido actualizarCon(PartidoDto partido) {
         return new  Partido(this.id, this.estadio, this.fecha, this.equipos, this.resultado,this.arbitroPrincipal);
     }
 

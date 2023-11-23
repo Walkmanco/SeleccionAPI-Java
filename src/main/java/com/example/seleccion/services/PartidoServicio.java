@@ -11,7 +11,7 @@ public interface PartidoServicio {
     List<Partido> mostrarPartidos();
     Partido crearPartido(PartidoDto partido);
     Optional<Partido> buscarPartidoPorId(Long id);
-    Optional<Partido> actualizarPartido(Long id, Partido partido);
+    Optional<Partido> actualizarPartido(Long id, PartidoDto partido);
     void borrarPartidoPorId(Long id);
     void borrarTodosPartidos();
 }

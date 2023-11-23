@@ -73,8 +73,7 @@ public class ResultadoServicioImpl implements ResultadoServicio {
             resultadoImDB.setGolLocal(resultado.getGolLocal());
             resultadoImDB.setGolVisitante(resultado.getGolVisitante());
             resultadoImDB.setNoTarjetaAmarilla(resultado.getNoTarjetaAmarilla());
-            resultadoImDB.setNoTarjetaRoja(resultado.getNoTarjetaRoja());
-                    
+            resultadoImDB.setNoTarjetaRoja(resultado.getNoTarjetaRoja());        
   
             return resultadoRepositorio.save(resultadoImDB);
         });

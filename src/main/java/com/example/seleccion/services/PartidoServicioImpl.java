@@ -30,14 +30,27 @@ public class PartidoServicioImpl implements PartidoServicio{
     }
 
     @Override
-    public Optional<Partido> actualizarPartido(Long id, Partido partido) {        
-        Optional<Partido> InDB = partidoRespositorio.findById(id);
+    public Optional<Partido> actualizarPartido(Long id, PartidoDto partido) {        
+        Optional<Partido> partidOptional = partidoRespositorio.findById(id);
         
-        Optional<Partido> actualizado = InDB.map(oldInDb -> {
-            Partido updated = oldInDb.actualizarCon(partido);
-            return partidoRespositorio.save(updated);
-        });
-        return actualizado;
+        if(partidOptional.isPresent()){
+            List<Equipo> lEquipos = new ArrayList<>();
+            lEquipos.add(equipoServicio.buscarPorId(partido.getIdEquipos().get(0)));
+            lEquipos.add(equipoServicio.buscarPorId(partido.getIdEquipos().get(1)));
+            
+
+            return partidoRespositorio.findById(id)
+            .map(inDB -> {                
+                inDB.setEstadio(partido.getEstadio());
+                inDB.setFecha(partido.getFecha());    
+                inDB.setEquipos(lEquipos);
+                inDB.setArbitroPrincipal(partido.getArbitroPrincipal());                                                                    
+  
+            return partidoRespositorio.save(inDB);
+            });
+        }            
+        else
+            throw new EquipoNoEncontradoException("No se encontró resultado con id: "+ id);
     }
 
     @Override
@@ -45,7 +58,8 @@ public class PartidoServicioImpl implements PartidoServicio{
         Optional<Partido> partidoOptional = partidoRespositorio.findById(id);
         
         if(partidoOptional.isPresent())             
-            partidoRespositorio.deleteById(id);   
+            partidoRespositorio.deleteById(id);  
+        else 
         throw new EquipoNoEncontradoException("No se encontró partido con id: "+ id);
         
 
@@ -65,16 +79,8 @@ public class PartidoServicioImpl implements PartidoServicio{
     @Override
     public Partido crearPartido(PartidoDto partido) {        
         List<Equipo> lEquipos = new ArrayList<>();
-        /*lEquipos.add(equipoServicio.buscarPorId(partido.getId()));
-        lEquipos.add(equipoServicio.buscarPorId(partido.getId()));*/
         lEquipos.add(equipoServicio.buscarPorId(partido.getIdEquipos().get(0)));
         lEquipos.add(equipoServicio.buscarPorId(partido.getIdEquipos().get(1)));
-
-        /*        for (Long idEquipo : partido.getIdEquipos()) {
-            Equipo equipo = equipoServicio.buscarPorId(partido.getIdEquipos().get(0));                    
-            lEquipos.add(equipo);
-        }*/
-      
         
 
         Partido partidoCopia = new Partido(partido.getId()
