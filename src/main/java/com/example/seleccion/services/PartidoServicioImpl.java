@@ -50,7 +50,7 @@ public class PartidoServicioImpl implements PartidoServicio{
             });
         }            
         else
-            throw new EquipoNoEncontradoException("No se encontró resultado con id: "+ id);
+            throw new EquipoNoEncontradoException("No se encontró partido con id: "+ id);
     }
 
     @Override
