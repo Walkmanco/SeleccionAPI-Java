@@ -25,7 +25,7 @@ public class EquipoServicioImpl implements EquipoServicio {
     public Equipo actualizarEquipo(Long id, Equipo nuevoEquipo) {
         Optional<Equipo> equipoOptional = equipoRepositorio.findById(id);   
         
-            
+        
         if (equipoOptional.isPresent()) {
             Equipo equipoInDB = equipoOptional.get();
         
@@ -86,9 +86,7 @@ public class EquipoServicioImpl implements EquipoServicio {
 
     @Override
     public void borrarTodo() {
-        equipoRepositorio.deleteAll();       
-    }
+        equipoRepositorio.deleteAll();
+    }    
 
-    
-    
 }
