@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'seleccion-api'
           slot-name: 'Production'
-          package: '${{ github.workspace }}/target/*.war'
+          package: ${{ github.workspace }}/target/*.war
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFCA196ED436464D9924A1AB2F26E283 }}
