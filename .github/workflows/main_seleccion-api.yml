@@ -25,10 +25,10 @@ jobs:
         run: mvn clean install
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/'
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     runs-on: windows-latest
@@ -39,7 +39,7 @@ jobs:
     
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: java-app
       
@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'seleccion-api'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/target/*.war
+          package: '*.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFCA196ED436464D9924A1AB2F26E283 }}
