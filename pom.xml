@@ -48,8 +48,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version> <!-- Utiliza la versión más reciente disponible -->
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -84,7 +83,7 @@
 
 	</dependencies>
 
-	<build>
+<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -98,40 +97,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-
-			<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
-            <configuration>
-                <source>17</source> <!-- depending on your project -->
-                <target>17</target> <!-- depending on your project -->
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.mapstruct</groupId>
-                        <artifactId>mapstruct-processor</artifactId>
-                        <version>${org.mapstruct.version}</version>
-                    </path>
-                    <!-- other annotation processors -->
-					<path>
-						<groupId>org.projectlombok</groupId>
-						<artifactId>lombok</artifactId>
-						<version>${org.projectlombok.version}</version>
-					</path>
-					<path>
-						<groupId>org.projectlombok</groupId>
-						<artifactId>lombok-mapstruct-binding</artifactId>
-						<version>${lombok-mapstruct-binding.version}</version>
-					</path>
-                </annotationProcessorPaths>
-				<compilerArgs>
-                    <compilerArg>
-                        -Amapstruct.defaultComponentModel=spring
-                    </compilerArg>
-                </compilerArgs>
-            </configuration>
-        </plugin>
-
 		</plugins>
 	</build>
 
